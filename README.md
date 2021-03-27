@@ -1,4 +1,4 @@
-## Assignment Flutter Login Scree
+# Assignment Flutter Login Screen
 
 ## Overview
 
