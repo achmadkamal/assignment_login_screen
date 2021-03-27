@@ -11,7 +11,17 @@ const kTitleBlack = TextStyle(
 );
 
 const kTitleWhite = TextStyle(
-  color: Colors.black,
+  color: Color(0xfff4f5f6),
   fontWeight: FontWeight.bold,
   fontSize: 18.0,
+);
+
+const kSubTitleWhite = TextStyle(
+  color: Color(0xfff4f5f6),
+  fontSize: 15.0,
+);
+
+const kTextComplexity = TextStyle(
+  color: Color(0xfff4f5f6),
+  fontSize: 12.0,
 );

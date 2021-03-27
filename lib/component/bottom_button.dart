@@ -1,10 +1,11 @@
+import 'package:assignment_login_screen/constants.dart';
 import 'package:flutter/material.dart';
 
 class BottomButton extends StatelessWidget {
   final Color textColour;
-  final Color buttonColour;
+
   final Function onPressed;
-  BottomButton({this.buttonColour, this.textColour, this.onPressed});
+  BottomButton({this.textColour, this.onPressed, Color buttonColour});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class BottomButton extends StatelessWidget {
       ),
       minWidth: double.infinity,
       height: 45.0,
-      color: Color(0xff4d7feb),
+      color: kSecondaryBlue,
       onPressed: onPressed,
       child: Text(
         'Next',

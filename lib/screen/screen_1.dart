@@ -1,4 +1,5 @@
 import 'package:assignment_login_screen/component/bottom_button.dart';
+import 'package:assignment_login_screen/component/progress_numb.dart';
 import 'package:assignment_login_screen/constants.dart';
 import 'package:assignment_login_screen/screen/screen_2.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +12,52 @@ class Screen1 extends StatefulWidget {
 }
 
 class _Screen1State extends State<Screen1> {
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kPrimaryBlue,
       resizeToAvoidBottomInset: false,
       body: Column(
         children: <Widget>[
-          Container(
-            height: 200.0,
-            color: kPrimaryBlue,
+          SafeArea(
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              color: kPrimaryBlue,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Step :',
+                    style: kTitleWhite,
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      ProgressNumber(
+                          numb: '1',
+                          backgroundColour: kGreyColour,
+                          numbColor: Colors.black),
+                      ProgressNumber(
+                          numb: '2',
+                          backgroundColour: kGreyColour,
+                          numbColor: Colors.black),
+                      ProgressNumber(
+                          numb: '3',
+                          backgroundColour: kGreyColour,
+                          numbColor: Colors.black),
+                      ProgressNumber(
+                          numb: '4',
+                          backgroundColour: kGreyColour,
+                          numbColor: Colors.black),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: Container(
@@ -65,17 +103,28 @@ class _Screen1State extends State<Screen1> {
                       style: kTitleBlack,
                     ),
                     SizedBox(height: 20.0),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        prefixIcon: Icon(Icons.email),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10.0),
-                          ),
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                            style: BorderStyle.solid,
+                    Form(
+                      key: _formKey,
+                      child: TextFormField(
+                        validator: (value) {
+                          Pattern pattern =
+                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                          RegExp regExp = RegExp(pattern);
+                          return (!regExp.hasMatch(value))
+                              ? 'Invalid Email Addresss'
+                              : null;
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Email',
+                          prefixIcon: Icon(Icons.email),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.0),
+                            ),
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              style: BorderStyle.solid,
+                            ),
                           ),
                         ),
                       ),
@@ -85,9 +134,10 @@ class _Screen1State extends State<Screen1> {
                         alignment: FractionalOffset.bottomCenter,
                         child: BottomButton(
                           textColour: Colors.white,
-                          buttonColour: kPrimaryBlue,
                           onPressed: () {
-                            Navigator.pushNamed(context, Screen2.id);
+                            if (_formKey.currentState.validate()) {
+                              Navigator.pushNamed(context, Screen2.id);
+                            }
                           },
                         ),
                       ),
@@ -103,4 +153,11 @@ class _Screen1State extends State<Screen1> {
   }
 }
 
-//Color(0xff4d7feb),
+
+
+
+
+
+
+
+//EdgeInsets.only(top: 20.0, bottom: 50.0, left: 20.0, right: 20.0),}
